@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('backend.artikel');
+});
+
+Route::get('/create/artikel', function () {
+    return view('backend.tambah-artikel');
+});
+
+Route::get('/v1/article', [ArticleController::class, 'getAllData'])->name('getData.artikel');
+Route::post('/v1/article', [ArticleController::class, 'createData'])->name('tambahData.artikel');
+Route::post('/v1/article/{id}', [ArticleController::class, 'updateData']);
+
